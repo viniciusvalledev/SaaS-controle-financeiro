@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GranaFácil | Análise Financeira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="auth-flow-container" class="auth-wrapper">
+      <div id="auth-container" class="auth-box">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Seu melhor email" />
+        <div class="password-wrapper">
+            <input type="password" id="login-password" placeholder="Sua senha" />
+            <i class="fa-solid fa-eye" id="login-eye-icon"></i>
+        </div>
+        <p class="link-secondary"><a href="#" id="forgot-password-link">Esqueci a senha</a></p>
+        <button class="btn btn-primary" id="login-btn">Entrar</button>
+        <p class="link">Não tem conta? <a href="#" id="toggle-to-signup">Criar uma conta</a></p>
+      </div>
+      <div id="signup-container" class="auth-box hidden">
+        <h2>Crie sua Conta</h2>
+        <input type="text" id="signup-username" placeholder="Seu nome" />
+        <input type="email" id="signup-email" placeholder="Seu melhor email" />
+        <div class="password-wrapper">
+            <input type="password" id="signup-password" placeholder="Crie uma senha forte" />
+            <i class="fa-solid fa-eye" id="signup-eye-icon"></i>
+        </div>
+        <button class="btn btn-primary" id="signup-btn">Criar Conta</button>
+        <p class="link">Já tem conta? <a href="#" id="toggle-to-login">Voltar ao login</a></p>
+      </div>
+    </div>
+
+    <div id="app-container" class="hidden">
+      <button id="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+      <nav id="sidebar"></nav>
+      <main id="main-content"></main>
+    </div>
+
+    <div id="confirm-modal-container" class="modal-overlay hidden">
+        <div class="modal-content auth-box">
+            <h3 id="confirm-modal-title">Tem certeza?</h3>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="confirm-modal-cancel-btn">Cancelar</button>
+                <button class="btn btn-danger" id="confirm-modal-ok-btn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
