@@ -1,8 +1,4 @@
-// ===================================================================
-// GRANA FÁCIL - JAVASCRIPT FINAL, COMPLETO E CORRIGIDO (V25)
-// ===================================================================
 
-// --- 1. IMPORTAÇÕES E CONFIGURAÇÃO DO FIREBASE ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 import { getFirestore, collection, addDoc, deleteDoc, doc, query, where, onSnapshot, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -20,7 +16,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// --- 2. VARIÁVEIS GLOBAIS ---
+// Variaveis GLOBAIS
 let currentUser = null;
 let currentCharts = [];
 let activeListeners = [];
@@ -32,7 +28,7 @@ const categories = {
     expense: ['Comida', 'Transporte', 'Moradia', 'Contas', 'Lazer', 'Saúde', 'Compras', 'Educação', 'Outros']
 };
 
-// --- 3. CONTROLE DE AUTENTICAÇÃO E SETUP ---
+// CONTROLE DE AUTENTICÇAO E SETUP
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
@@ -129,7 +125,7 @@ function toggleAuth(event) {
     document.getElementById("signup-container").classList.toggle("hidden");
 }
 
-// --- 4. ROTEADOR DE TELAS ---
+// 4 ROTEADOR DE TELAS
 function navigateTo(view, params = {}) {
     if (currentUnsubscribe) currentUnsubscribe();
     currentCharts.forEach(chart => chart.destroy());
@@ -148,7 +144,7 @@ function navigateTo(view, params = {}) {
     }
 }
 
-// --- 5. RENDERIZAÇÃO DA SIDEBAR ---
+// RENDERIZAÇAO DA SIDEBAR
 function renderSidebar() {
     const createSubMenu = (type, categoryList) => categoryList.map(cat =>
         `<li><a class="sidebar-link" href="#" data-view="dashboard_categoria" data-type="${type}" data-category="${cat}">${cat}</a></li>`
@@ -193,7 +189,7 @@ function renderSidebar() {
     });
 }
 
-// --- 6. FUNÇÕES QUE DESENHAM CADA TELA (VIEWS) ---
+// FUNÇOES QUE DESENHAM CADA TELA
 function renderWelcomeView() {
     mainContent.innerHTML = `<div class="welcome-view"><h1>Seja Bem-vindo, ${currentUser.displayName}!</h1><p>É muito bom tê-lo de volta. Selecione uma opção no menu.</p></div>`;
 }
@@ -419,7 +415,7 @@ function renderCategoryTransactionList(transactions) {
     });
 }
 
-// --- 8. FUNÇÕES DE GRÁFICOS E MODAL ---
+// FUNÇOES DE GRAFICOS
 function renderCombinedChart(incomeData, expenseData, type = 'column') {
     const container = document.getElementById('charts-container');
     if (!container) return;
@@ -493,7 +489,7 @@ function showCustomConfirm(message, onConfirm, isAlert = false) {
     confirmModal.classList.remove('hidden');
 }
 
-// --- 9. FUNÇÕES DE DADOS E UTILITÁRIAS ---
+// FUNÇOES DE DADOS E UTILITARIOS
 async function addTransaction(amount, description, type, category) {
     await addDoc(collection(db, "transactions"), { uid: currentUser.uid, amount, description: description.trim() === '' ? 'Sem descrição' : description.trim(), type, category, createdAt: Timestamp.fromDate(new Date()) });
 }
