@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Esta regra se aplica à nossa coleção "transactions"
+    match /transactions/{transactionId} {
+      
+      // PERMITE que um usuário CRIE uma transação se:
+      // 1. Ele estiver logado (request.auth != null)
+      // 2. O "carimbo digital" (uid) da transação for o mesmo que o seu próprio ID.
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.uid;
+                      
+      // PERMITE que um usuário LEIA, ATUALIZE ou APAGUE uma transação se:
+      // 1. Ele estiver logado
+      // 2. O "carimbo digital" (uid) da transação que já existe for igual ao seu.
+      allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.uid;
+    }
+  }
+}
